@@ -9,6 +9,8 @@ export const mainStyles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     color: "#07F",
+    textAlign: "center",
+    marginTop: 50,
   },
   header: {
     flexDirection: "row",

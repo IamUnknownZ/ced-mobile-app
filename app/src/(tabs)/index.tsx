@@ -1,13 +1,17 @@
 import { useEffect, useRef } from "react";
 import { Text, View, Animated, Easing } from "react-native";
-import { mainStyles } from "../styles/style";
-import { Link } from "expo-router";
+import { mainStyles } from "../../styles/style";
 
 export default function Index() {
+  // ==========================================
+  // ANIMATION SETUP & CONFIGURATION
+  // ==========================================
   const spinValue = useRef(new Animated.Value(0)).current;
   const blinkValue = useRef(new Animated.Value(0)).current;
 
+  // Initialize and run the animations when the component mounts
   useEffect(() => {
+    // 1. Spinning Animation loop setup
     spinValue.setValue(0);
     const spinAnim = Animated.loop(
       Animated.timing(spinValue, {
@@ -19,8 +23,8 @@ export default function Index() {
     );
     spinAnim.start();
 
-    // Add blinking animation
-    Animated.loop(
+    // 2. Blinking (Border Color) Animation loop setup
+    const blinkAnim = Animated.loop(
       Animated.sequence([
         Animated.timing(blinkValue, {
           toValue: 1,
@@ -33,13 +37,17 @@ export default function Index() {
           useNativeDriver: false,
         }),
       ]),
-    ).start();
+    );
+    blinkAnim.start();
 
+    // Clean up animations on unmount
     return () => {
       spinAnim.stop();
+      blinkAnim.stop();
     };
   }, []);
 
+  // 3. Interpolations mapping animated values to CSS values
   const rotateAnimation = spinValue.interpolate({
     inputRange: [0, 1],
     outputRange: ["0deg", "360deg"],
@@ -47,23 +55,20 @@ export default function Index() {
 
   const borderColor = blinkValue.interpolate({
     inputRange: [0, 1],
-    outputRange: ["#0ff", "#f0f"], // Neon colors
+    outputRange: ["#0ff", "#f0f"], // Neon colors transition
   });
 
+  // ==========================================
+  // RENDER COMPONENT LAYOUT
+  // ==========================================
   return (
     <View style={mainStyles.container}>
-      <View style={mainStyles.header}>
-        <Text style={mainStyles.title}>สบายแท้ 0079</Text>
-        <Link href="/src/education" style={mainStyles.link}>
-          Education
-        </Link>
-        <Link href="/src/contact" style={mainStyles.link}>
-          Contact
-        </Link>
-      </View>
+      <Text style={mainStyles.title}>Kanok045</Text>
+
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        {/* Animated Image using the rotation and blinking border defined above */}
         <Animated.Image
-          source={require("../img/jn.jpg")}
+          source={require("../../img/jn.jpg")}
           style={[
             mainStyles.image,
             {
