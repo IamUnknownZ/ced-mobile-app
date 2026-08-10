@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "Students Phone",
+    "slug": "students-phone-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "students-phone",
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "android": {
+      "package": "com.student.studentsphone"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
