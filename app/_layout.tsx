@@ -1,24 +1,36 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { Stack } from "expo-router";
+import { SQLiteDatabase, SQLiteProvider } from "expo-sqlite";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const createTable = async (db: SQLiteDatabase) => {
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS todos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        completed INTEGER NOT NULL DEFAULT 0
+      );
+    `);
+  };
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+    <SQLiteProvider
+      databaseName="stdphones.db"
+      onInit={createTable}
+      options={{ useNewConnection: false }}
+    >
+      <Stack
+        screenOptions={{
+          headerShown: true,
+          headerStyle: { backgroundColor: "#252525" },
+          headerTintColor: "#FFF9F0",
+          headerTitleStyle: { fontWeight: "900" },
+        }}
+      >
+        <Stack.Screen
+          name="index"
+          options={{ title: "Daily Focus" }}
+        />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    </SQLiteProvider>
   );
 }
