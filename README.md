@@ -1,28 +1,42 @@
-# Planet Cleaner: หมุนโลก แยกขยะ
+# Planet Cleaner
 
-ต้นแบบ Alpha สำหรับมือถือแนวตั้ง: หนึ่งด่านสวน ขยะ 8 ชนิด สำรวจด้วย Gyroscope หรือปุ่มทดลอง เล็ง เก็บ แยกขยะ ดูคำอธิบาย และสรุปคะแนน พร้อมวิธีเล่น คู่มือที่ปลดล็อกเมื่อพบขยะ ตั้งค่าเซนเซอร์ และบันทึกคะแนนสูงสุดในเครื่อง แอปยังต้องผ่านการทดสอบครบลูปบนอุปกรณ์จริงก่อนยืนยันว่า Alpha พร้อมใช้งาน
+Planet Cleaner is a mobile game about caring for the environment and learning how to sort waste. Rotate a small 3D planet using your device's gyroscope, aim at litter, collect it, and choose the appropriate waste category. Each answer includes an explanation and disposal advice.
 
-## เริ่มทดสอบ
+The game has four areas to explore: the public park, school, beach, and community. It includes 15 types of waste, a discoverable waste guide, scores and level results, sound settings, and gyroscope calibration. Progress and settings are saved on the device.
 
-ใช้ Node.js 24 แล้วรัน:
+## Getting started
+
+Install Node.js 24 and the project dependencies, then start Expo:
 
 ```sh
 npm install
 npx expo start --tunnel --clear
 ```
 
-เปิดด้วย **Expo Go ที่รองรับ SDK 58** หรือ development build SDK 58 แล้วสแกน QR code; Expo Go SDK 57 ที่เคยใช้กับโปรเจกต์รุ่นก่อนเปิดรุ่นนี้ไม่ได้ หาก Expo Go รุ่นใน store ไม่ตรง ดู https://docs.expo.dev/troubleshooting/expo-go-version-mismatch/
+Scan the QR code with **Expo Go compatible with Expo SDK 58**, or use an SDK 58 development build. A physical device with a gyroscope is required to test motion controls. If Expo Go reports a version mismatch, see [Expo's troubleshooting guide](https://docs.expo.dev/troubleshooting/expo-go-version-mismatch/).
 
-เลือก **ตั้งค่าการหมุน** เพื่อทดสอบกล่อง, ตั้งศูนย์, ความไว, วิธีเล็ง และกลับทิศแกน ค่าบันทึกในเครื่อง กด **เริ่มดูแลดาว** เพื่อเล่นสวน เล็งขยะให้ตรงวงกลาง แล้วแตะตรงไหนก็ได้บนพื้นที่ดาว → เก็บ → เลือกถัง → อ่านคำอธิบาย → ต่อไป แล้วทดลองพักและเล่นอีกครั้ง ใช้ปุ่มทดลองหมุนได้เมื่อไม่มีเซนเซอร์ ผลจากปุ่มไม่ใช่ผลทดสอบ Gyroscope
+## How to play
 
-## ตรวจโค้ด
+1. Choose a location and move your device to rotate the planet.
+2. Aim the crosshair at waste, then tap anywhere on the planet to inspect it.
+3. Collect the item and choose a waste category.
+4. Read the explanation and continue until the area is clean.
 
-`npm run typecheck`, `npm test`, `npx expo install --check`, `npx expo-doctor`, `npx expo export --platform android --platform ios` ผล export เป็นการตรวจ bundle ไม่ใช่การทดสอบบนอุปกรณ์จริง
+Use **Pause rotation** to adjust your grip, **Recenter** to reset the view, and the fast exploration setting to rotate further with less physical movement. Test buttons are available when a gyroscope is unavailable; they do not replace testing the sensor on a real device.
 
-รายละเอียดและข้อจำกัดอยู่ใน `docs/PHASE_PROGRESS.md`, `docs/TEST_REPORT.md`, `docs/REFERENCE_AUDIT.md` และ `docs/DEVICE_TEST.md` ก่อนสร้างหรือแก้โมเดล 3D ชุดใหม่ต้องได้รับอนุญาตตาม `AGENTS.md`
+## Motion settings
 
-## Beta candidate
+Open **Motion settings** to adjust sensitivity, horizontal aiming, axis direction, and the centre position. To calibrate the device, place it still for about four seconds while the game measures sensor drift and noise. The resulting calibration is saved on the device. Test the controls and adjust sensitivity to suit your device and preference.
 
-หน้าแรกมีเพลงและเอฟเฟกต์จากโปรเจกต์ Jong พร้อมสวิตช์เปิด–ปิดแยกกัน ดูที่มาใน `docs/ASSET_LICENSES.md` หน้าตั้งค่าการหมุนมีปุ่ม **ปรับเทียบเครื่องนี้**: วางอุปกรณ์นิ่งประมาณ 2 วินาทีเพื่อวัด offset/noise แล้วทดสอบการเล็งและตั้งความไวตามความถนัด รายละเอียดขอบเขตและสิ่งที่ต้องทดสอบอยู่ใน `docs/BETA_STATUS.md`
+## Checks
 
-ในด่านสวน **สำรวจรอบดาวเร็ว ×3** เพิ่มระยะหมุนที่เกิดจากการขยับมือ ปรับเป็นปกติได้ และใช้ **พักหมุน** เพื่อจัดท่าจับใหม่ก่อนกดหมุนต่อ โดยไม่ต้องหมุนทั้งตัว
+```sh
+npm run typecheck
+npm test
+npx expo install --check
+npx expo export --platform android
+```
+
+An export verifies that the bundle can be built; it does not replace testing gameplay, rendering, and motion controls on physical devices.
+
+Additional project information is in the `docs/` directory, including asset credits in `docs/ASSET_LICENSES.md`, educational sources in `docs/CONTENT_SOURCES.md`, and device testing notes in `docs/DEVICE_TEST.md`.
