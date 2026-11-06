@@ -1,0 +1,8 @@
+# Planet Cleaner 1.0.0 — Android release candidate
+
+- Android APK uses package `com.delsinz.planetcleaner`, version code 2, the existing EAS signing key, and the `release` build profile. The profile produces a signed APK for direct installation; it does not submit to an app store.
+- Android high-rate sensor permission is included because the installed Expo Sensors Android implementation otherwise registers the gyroscope at `SENSOR_DELAY_NORMAL`. Calibration accepts slower valid samples over four seconds and reports the number received. Gyro settings and saved progress remain in the existing storage keys.
+- Expo GL release minification workaround remains enabled; Expo, expo-gl and expo-audio were updated to the current SDK 58 patch versions. The app has a game icon and shows 1.0.0.
+- Automated checks: TypeScript; 26 tests; Expo Doctor 20/20; Android JS export; generated Android manifest confirms HIGH_SAMPLING_RATE_SENSORS and version code 2; generated Gradle properties confirm release minification is disabled.
+- No physical device was attached during this pass. Before describing this candidate as a verified final release, test install over the previous APK, startup, gyroscope calibration with the device still, response in both directions in diagnostics and all four stages, all items through sorting and results, background/resume, audio, performance and small/large screens on target Android devices. Also review source content and asset permissions as recorded in CONTENT_SOURCES.md and ASSET_LICENSES.md.
+- `npm audit --omit=dev` currently reports 11 moderate advisories in Expo tooling and dependencies. The proposed automatic fix changes Expo across major versions; no such forced downgrade was applied. Assess Expo updates before store publication.

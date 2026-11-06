@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "Planet Cleaner",
+    "slug": "planet-cleaner",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/art/app-icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMotionUsageDescription": "Motion sensors control the view in the game."
+      }
+    },
+    "android": {
+      "package": "com.delsinz.planetcleaner",
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.HIGH_SAMPLING_RATE_SENSORS"
+      ],
+      "versionCode": 2
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false
+        }
+      ],
+      "expo-asset",
+      "./plugins/withAndroidGlReleaseFix"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "024ed170-adff-41e8-a49b-53628ad118be"
+      }
+    },
+    "owner": "delsinz"
+  }
+}
